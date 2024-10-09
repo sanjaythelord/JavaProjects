@@ -1,0 +1,24 @@
+package com.neo.aop;
+
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.context.annotation.Configuration;
+
+@Aspect // declare the class as aspect
+@Configuration
+public class LoggingAspect {
+
+	@Before("execution(* com.neo.model.Emp.displayFullName(..))")
+	public void specificMethod(JoinPoint joinPoint) {
+		System.out.println("using logBefore() for displayFullName()!..."+joinPoint.getSignature().getName());
+	}
+	
+	@After("execution(* com.neo.model.Emp.displayFullName(..))")
+	public void usingAfterMethodForDisplayFullName() {
+		System.out.println("Using After method...");
+	}
+	
+	@Around("execution")
+}
